@@ -48,11 +48,31 @@ app.get("/updatetask", function(req,res) {
     res.render("updatetask.html");
 });
 
+app.get("/findNotTomorrow", function(req,res) {
+    tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(10);
+    tomorrow.setMinutes(0);
+    tomorrow.setSeconds(0);
+    tomorrow.setMilliseconds(0);
+
+    console.log(tomorrow);
+
+    query = {due: {$ne: tomorrow} };
+
+    col.find(query).toArray(function(err,data) {
+        res.render("tasklist.html", {tasks: data});
+    });
+});
+
 app.post("/add", function(req,res) {
     let randomID = Math.round(Math.random() * 1000);
     let d = new Date(req.body.due);
     let newTask = {taskID: randomID, name: req.body.name, assignedTo: req.body.assignedTo, due: d, status: req.body.status, desc: req.body.desc};
     
+    console.log(req.body.due);
+
+
     col.insertOne(newTask);
 
     res.redirect("/listtasks");
