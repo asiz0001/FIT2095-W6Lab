@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <h1>
+            <a href="/">Home</a>
+            <a href="/newtask">Add new task</a>
+            <a href="/deletetask">Delete by ID</a>
+            <a href="/deleteall">Delete all completed tasks</a>
+            <a href="/updatetask">Update status</a>
+        </h1>
+
+        <table>
+            <tr>
+                <td>Task ID</td>
+                <td>Name</td>
+                <td>Assigned To</td>
+                <td>Due Date</td>
+                <td>Status</td>
+                <td>Description</td>
+            </tr>
+            <% for (var i = 0; i < tasks.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= tasks[i].taskID %>
+                    </td>
+                    <td>
+                        <%= tasks[i].name %>
+                    </td>
+                    <td>
+                        <%= tasks[i].assignedTo %>
+                    </td>
+                    <td>
+                        <%= tasks[i].due %>
+                    </td>
+                    <td>
+                        <%= tasks[i].status %>
+                    </td>
+                    <td>
+                        <%= tasks[i].desc %>
+                    </td>  
+                </tr>
+            <% } %>
+        </table>
+        
+    </body>
+</html>
